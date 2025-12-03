@@ -24,33 +24,18 @@ void solve()
     for (int i = 0; i < n; i++)
     {
         int v = i + 1;
-        int x = i + 1, h = -1, o = -1;
+        int x = i + 1;
 
-        // fix: use previous prefix sum
+        // use previous prefix sum for maxi
         if (i > 0)
-        {
-            if (-(x * x) + x + p[i - 1] > maxi)
-            {
-                maxi = max(maxi, -(x * x) + x + p[i - 1]);
-                h = (x * x);
-                o = x + p[i - 1];
-            }
-        }
+            maxi = max(maxi, p[i - 1] - (x * x) + x);
         else
-        {
-            if (-(x * x) + x + 0 > maxi)
-            {
-                maxi = max(maxi, -(x * x) + x + 0);
-                h = (x * x);
-                o = x + 0;
-            }
-        }
+            maxi = max(maxi, -(x * x) + x);
 
-        int p1 = (v * v) + v - p[i];
-        int fj = sum - h + o;
+        int p1 = v * v - p[i] + v;
 
-        // fix: correct combination
-        m = max(m, fj + p1);
+        // combine correctly
+        m = max(m, p1 + maxi + sum);
     }
 
     cout << m << "\n";
