@@ -1,46 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
+#define int long long
+
+void solve()
+{
+    int n, k;
+    cin >> n >> k;
+
+    set<int> st;
+    for (int i = 1; i <= n; i++)
+        st.insert(i);
+
+    auto it = st.begin();
+    while (!st.empty())
+    {
+        if (st.size() >= k)
+        {
+            for (int i = 0; i < k; i++)
+            {
+                it++;
+                if (it == st.end())
+                    it = st.begin();
+            }
+        }
+        cout << *it << " ";
+        auto del = it++;
+        if (it == st.end())
+            it = st.begin();
+        st.erase(del);
+    }
+}
+
+signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int x, n;
-    cin >> x >> n;
-
-    set<int> lights;
-    multiset<int> gaps;
-
-    // initial lights
-    lights.insert(0);
-    lights.insert(x);
-    gaps.insert(x);
-
-    for (int i = 0; i < n; i++)
-    {
-        int p;
-        cin >> p;
-
-        // right light
-        auto it = lights.upper_bound(p);
-        int right = *it;
-        it--;
-        int left = *it;
-
-        // old gap remove
-        gaps.erase(gaps.find(right - left));
-
-        // new gaps add
-        gaps.insert(p - left);
-        gaps.insert(right - p);
-
-        // insert new light
-        lights.insert(p);
-
-        // print max gap
-        cout << *gaps.rbegin() << " ";
-    }
-
+    solve();
     return 0;
 }
