@@ -34,7 +34,7 @@ void solve()
     {
         freq[a[r]]++;
 
-        // window invalid হলে shrink
+    
         while ((int)freq.size() > k)
         {
             freq[a[l]]--;
