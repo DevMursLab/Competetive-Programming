@@ -13,5 +13,6 @@ int main()
     int cur1 = 0, cur2 = 0, cur3 = 0, cur4 = 0;
     for (int i = 1; i < r; i++)
     {
+        
     }
 }

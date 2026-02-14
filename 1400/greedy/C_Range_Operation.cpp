@@ -50,6 +50,8 @@ void solve()
             bestL = curL;
             bestR = i;
         }
+
+        maxi=max(curr)
     }
 }
 // sort(ALL(a),greater<int>());
