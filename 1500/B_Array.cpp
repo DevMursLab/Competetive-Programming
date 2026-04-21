@@ -17,35 +17,34 @@ const int N = 1e5 + 5;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+
+    // 2d input
+    // vector<vector< int>> d(n, vector< int>(m));
+    int n;
+    cin >> n;
     vector<int> a(n);
     for (int i = 0; i < n; i++)
-        cin >> a[i];
-
-    int l = 0, mask = 0;
-    pair<int, int> ans = {-1, -1};
-
-    for (int r = 0; r < n; r++)
     {
-        mask |= (1 << (a[r] - 1)); 
-
-        while (__builtin_popcount(mask) > k)
-        {
-            mask &= ~(1 << (a[l] - 1)); 
-            l++;
-        }
-
-        if (__builtin_popcount(mask) == k)
-        {
-            ans = {l + 1, r + 1};
-            break; 
-        }
+        cin >> a[i];
     }
+    vector<int> ans(n);
+    for (int i = 0; i < n; i++)
+    {
+        int l1 = 0, l2 = 0;
 
-    cout << ans.first << " " << ans.second << endl;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[i] < a[j])
+                l1++;
+            if (a[i] > a[j])
+                l2++;
+        }
+        ans[i] += max(l1, l2);
+    }
+    for (auto it : ans)
+        cout << it << " ";
+    cout << endl;
 }
-
 // sort(ALL(a),greater<int>());
 // int maxi=*max_element(a.begin(),a.end());
 //  int maxi = distance(a.begin(), max_element(a.begin(), a.end()));   // return max index
@@ -57,8 +56,12 @@ signed main()
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    solve();
-
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
     return 0;
 }
 

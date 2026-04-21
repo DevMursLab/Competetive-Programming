@@ -9,8 +9,16 @@ long long triangular(long long k)
 {
     return k * (k + 1) / 2;
 }
-bool cheak(int m)
+bool cheak(int n)
 {
+    int low = 1, high = 1e9;
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+        if (triangular(mid) > n)
+            continue;
+        if ()
+    }
 }
 void solve()
 {
@@ -22,7 +30,7 @@ void solve()
         int mid = low + (high - low) / 2;
         if (triangular(mid) > n)
             continue;
-        if ()
+        if (cheak(n))
     }
 }
 

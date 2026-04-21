@@ -30,25 +30,29 @@ void solve()
     //     cin >> a[i];
     //}
     int ans = 0;
-    int c0 = 1;
+    int c0 = (n + 1) / 2;
     int c1 = 0;
 
     while (n >= k)
     {
         if (n % 2 == 0)
         {
+
+            int x = (n + 1) / 2;
+            c0 = (2*c0);
             n /= 2;
-            c1 = 2 * c1 + c0 * n;
-            c0 *= 2;
+            c1 *= 2;
         }
         else
         {
-            ans += (n + 1) / 2 * c0 + c1;
+
+            ans += c0;
             n /= 2;
-            c1 = 2 * c1 + c0 * (n + 1);
-            c0 *= 2;
+            c0 = c0 * 1LL * 2;
+            c1 *= 2;
         }
     }
+
     cout << ans << endl;
     // sort(ALL(a),greater<int>());
     // int maxi=*max_element(a.begin(),a.end());

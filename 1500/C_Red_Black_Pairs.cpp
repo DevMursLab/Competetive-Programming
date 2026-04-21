@@ -20,64 +20,44 @@ void solve()
 
     // 2d input
     // vector<vector< int>> d(n, vector< int>(m));
-    int n, h, k;
-    cin >> n >> h >> k;
-    vector<int> a(n), b(n), pre_min(n), suff_max(n);
-    for (int i = 0; i < n; i++)
+    //   int n;
+    // cin >> n;
+    // vector< int> a(n);
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cin >> a[i];
+    //}
+    int n;
+    cin >> n;
+    string a, b;
+    cin >> a >> b;
+    if (n == 1)
     {
-        cin >> a[i];
+        if (a[0] != b[0])
+            cout << 1 << endl;
+        else
+            pz cheakmate
     }
 
-    int sum = accumulate(ALL(a), 0LL);
-    pre_min[0] = a[0];
-    suff_max[n - 1] = a[n - 1];
-
+    int age1 = 0, age2 = 0;
+    if (a[0] != b[0])
+        age1 = 1;
+    int curr = INT_MAX;
     for (int i = 1; i < n; i++)
     {
-        pre_min[i] = min(a[i], pre_min[i - 1]);
+        int lombo = 0, onuvumik = 0;
+        if (a[i] != b[i])
+            lombo = 1;
+        if (a[i] != a[i - 1])
+            onuvumik++;
+        if (b[i] != b[i - 1])
+            onuvumik++;
+        curr = min(age1 + lombo, age2 + onuvumik);
+        age2 = age1;
+        age1 = curr;
     }
-
-    for (int i = n - 2; i >= 0; i--)
-    {
-        suff_max[i] = max(a[i], suff_max[i + 1]);
-    }
-
-    long long full = (h - 1) / sum;
-    long long ans = full * n;
-    ans += full * k;
-
-    long long rem = h - (full * sum);
-    // cout << ans << endl;
-    for (int i = 0; i < n; i++)
-    {
-        rem -= a[i];
-        ans++;-
-        if (rem > 0)
-        {
-            rem += a[i];
-            if (rem - suff_max[i] <= 0)
-            {
-
-                break;
-            }
-            rem -= a[i];
-        }
-        else if (rem < 0)
-        {
-            if (rem + pre_min[i] == 0)
-            {
-                ans--;
-                break;
-            }
-        }
-    }
-
-    cout << ans << "\n";
-
-    // for (auto it : a)
-    //     cout << it << " ";
+    cout << age1 << endl;
 }
-
 // sort(ALL(a),greater<int>());
 // int maxi=*max_element(a.begin(),a.end());
 //  int maxi = distance(a.begin(), max_element(a.begin(), a.end()));   // return max index
